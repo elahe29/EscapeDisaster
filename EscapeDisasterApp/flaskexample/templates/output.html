@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>EscapeDisaster</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../static/js/moment.min.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="jumbotron-narrow.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+
+    <div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" class="active"><a  target="_blank" href="https://goo.gl/a6F9Wr">Demo Slides</a></li>
+          </ul>
+        </nav>
+        <!--<h3 class="text-muted">Project name</h3>-->
+      </div>
+
+
+
+
+ <div class="jumbotron">
+        <h1><img src="../static/media/logo.png" alt="logo" style="width500px;height:200px;"></h1>
+
+	<div class = "container">
+
+      <form  action="/output" method="GET">
+        <div class="form-group">
+          <label for="date" style="color:#2E86C1; font-weight:bold">At :</label>
+            <input type="date" id="date" name='date' value="{{selectedDate}}">
+
+          <label for="CITY" style="color:#2E86C1; font-weight:bold" >I am travelling to :</label>
+          <select name= CITY method="GET" action="/">
+           {% for city in cities %}
+             <option {% if city == selectedCity %} selected="selected" {% endif %} value= "{{city}}" > {{city}}</option>
+           {% endfor %}
+         </select>
+
+
+        </div>
+
+        <!--<div>
+        
+          <button type="submit" class="btn btn-default btn-lg" style="color:#862d59">Predict the Risk</button>
+        </div>-->
+                
+        <button type="submit" class="btn btn-default btn-lg" style="background-color:#2E86C1;color:#FFFFFF">Predict the Risk</button>
+
+      </form>
+    </div>
+
+  </div>
+
+      <!--<div class="row marketing">-->
+
+        
+        
+
+<div class="jumbotron" style="background-color:#F9E79F">
+
+
+        <div class="col-lg-6">
+          {% if risk_factor and flight_risk %}
+            <h4>You may experience flight delay/cancellation at <font color="#f46b42">{{date}}</font> to <font color="#f46b42">{{selectedCity}} </font></h4>
+            {% if tornado_risk %}
+            <p><img src="../static/media/tornado.png" alt="logo" style="width500px;height:200px;"></p>
+            {% endif %}
+            {% if wet_risk %}
+            <p><img src="../static/media/flood_rain.png" alt="logo" style="width500px;height:200px;"></p>
+            {% endif %}
+            {% if cold_risk %}
+            <p><img src="../static/media/blizzard.png" alt="logo" style="width500px;height:200px;"></p>
+            {% endif %}
+            {% if bestMonth %}
+            <h4>Travel Advice</h4>
+            <p>The best time to visit <font color="#2E86C1">{{selectedCity}} </font>is <font color="#2E86C1">{{best_months}}</font></p>
+            {% endif %}
+          {% else %}
+             <h4><font color="#2E86C1">{{day}} </font>  <font color="#2E86C1">{{month_name}}</font> is a great time to visit {{selectedCity}} </h4>
+
+             <p style="color:#2E86C1 ; font-weight:bold">Check Ticket Prices Here:
+
+                <a href="https://www.skyscanner.net/"><img src="../static/media/skyscannerlogo.png" alt="logo" style="width:100px;height:50px;"></a></p>
+       
+          {% endif %}
+        </div>
+
+        
+</div>
+
+          <footer class="footer">
+        <!--<p>&copy; Insight Data Science.</p>-->
+      </footer>
+
+    </div> <!-- /container -->
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
